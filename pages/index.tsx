@@ -363,7 +363,7 @@ function handleCGPA(
   const oldHours = Number((oldHoursEle as HTMLInputElement).value);
   const oldGPA = Number((oldGPAEle as HTMLInputElement).value);
 
-  if (oldGPA === 0 || oldHours === 0) {
+  if (oldGPA === 0 || oldHours === 0 || isNaN(oldGPA) || isNaN(oldHours)) {
     document.getElementById("CGPA")?.classList.add("animate-wiggle");
     sleep(500).then(() => {
       document.getElementById("CGPA")?.classList.remove("animate-wiggle");
