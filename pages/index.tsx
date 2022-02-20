@@ -99,7 +99,7 @@ const GradeComponent = ({
       </select>
       <button
         className="border rounded bg-skin-secondary px-4"
-        onClick={(e) => {
+        onClick={() => {
           const courseId: string =
             (document.getElementById(course) as HTMLInputElement).value ||
             course;
@@ -117,11 +117,14 @@ const GradeComponent = ({
               `${course}-select-hours`
             ) as HTMLInputElement
           ).value = "Cr. H";
+
           (
             document.getElementById(
               `${course}-select-grades`
             ) as HTMLInputElement
           ).value = "Grade";
+
+          (document.getElementById(course) as HTMLInputElement).value = "";
         }}
       >
         X
@@ -202,7 +205,7 @@ function Home() {
                 ? "z-10 absolute w-screen h-screen bg-black bg-opacity-75"
                 : "hidden"
             }
-            onClick={(e) => {
+            onClick={() => {
               const GPAResultElem = document.getElementById("GPAResult");
               GPAResultElem?.classList.add("animate-zoom-out");
               sleep(500).then(() => {
@@ -221,7 +224,7 @@ function Home() {
                 ? "z-10 absolute w-screen h-screen bg-black bg-opacity-75"
                 : "hidden"
             }
-            onClick={(e) => {
+            onClick={() => {
               const GPAResultElem = document.getElementById("CGPAResult");
               GPAResultElem?.classList.add("animate-zoom-out");
               sleep(500).then(() => {
@@ -256,7 +259,7 @@ function Home() {
               <div className="flex justify-between mx-2">
                 <button
                   className="bg-skin-primary rounded py-2 px-4 w-full mr-2"
-                  onClick={(e) => {
+                  onClick={() => {
                     handleGPA(
                       userGrades,
                       userHours,
@@ -268,9 +271,7 @@ function Home() {
                 >
                   Calculate GPA
                 </button>
-                {/* <button className="bg-muted rounded py-2 px-4 w-1/2">
-                Show Calculation
-              </button> */}
+                {/* <button className="bg-muted rounded py-2 px-4 w-1/2">Show Calculation</button> */}
               </div>
             </div>
           </div>
@@ -298,15 +299,13 @@ function Home() {
                 <div className="flex justify-between mx-2">
                   <button
                     className="bg-skin-primary rounded py-2 px-4 w-full mr-2"
-                    onClick={(e) =>
+                    onClick={() =>
                       handleCGPA(GPA, userHours, setCGPA, setClicked)
                     }
                   >
                     Calculate CGPA
                   </button>
-                  {/* <button className='bg-muted rounded py-2 px-4 w-1/2'>
-                  Show Calculation
-                </button> */}
+                  {/* <button className='bg-muted rounded py-2 px-4 w-1/2'>Show Calculation</button> */}
                 </div>
               </div>
             </div>
@@ -314,7 +313,7 @@ function Home() {
         </div>
         <div
           className="fill-skin-primary sticky z-10 bottom-8 w-16 h-16 mx-auto mr-8 hover:fill-skin-hover"
-          onClick={(e) => {
+          onClick={() => {
             const themable = document.getElementById("themable");
             // for some weird reason `themable?.classList.remove(theme)` doesn't work
             // I spent 3 hours trying to find what's wrong with the above code with no success :/
