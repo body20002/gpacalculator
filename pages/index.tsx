@@ -36,13 +36,13 @@ const GradeComponent = ({
   userHours,
   setUserHours,
 }: {
-  course: string;
-  placeholder: string;
-  userGrades: object;
-  setUserGrades: Function;
-  userHours: object;
-  setUserHours: Function;
-}) => {
+    course: string;
+    placeholder: string;
+    userGrades: object;
+    setUserGrades: Function;
+    userHours: object;
+    setUserHours: Function;
+  }) => {
   return (
     <div className="flex justify-between mb-4 mx-2">
       <input
@@ -51,7 +51,7 @@ const GradeComponent = ({
         id={course}
         className="border rounded px-1 py-2 w-1/2 sm:w-2/3"
         placeholder={placeholder}
-      />
+        />
       <select
         required
         name={course}
@@ -62,7 +62,7 @@ const GradeComponent = ({
           const tmp: any = userHours;
           const courseId =
             (document.getElementById(course) as HTMLInputElement).value ||
-            course;
+              course;
           tmp[courseId] = e.target.value;
           setUserHours(tmp);
         }}
@@ -83,7 +83,7 @@ const GradeComponent = ({
           const tmp: any = userGrades;
           const courseId =
             (document.getElementById(course) as HTMLInputElement).value ||
-            course;
+              course;
           tmp[courseId] = e.target.value;
           setUserGrades(tmp);
         }}
@@ -102,7 +102,7 @@ const GradeComponent = ({
         onClick={() => {
           const courseId: string =
             (document.getElementById(course) as HTMLInputElement).value ||
-            course;
+              course;
 
           let tmp: any = userGrades;
           tmp[courseId] = 0;
@@ -140,10 +140,20 @@ const handleGPA = (
   setClicked: Function,
   setCGPA: Function
 ) => {
+
+  if (JSON.stringify(Object.keys(grades).sort()) !== JSON.stringify(Object.keys(hours).sort())){
+    document.getElementById("GPA")?.classList.add("animate-wiggle");
+    sleep(500).then(() => {
+      document.getElementById("GPA")?.classList.remove("animate-wiggle");
+    });
+    return;
+  }
+
   const keys: string[] = Object.keys(grades);
   const results: any = {};
 
   keys.forEach((key: any) => {
+
     results[key] = grades[key] * hours[key];
   });
 
@@ -151,17 +161,17 @@ const handleGPA = (
     accumVariable,
     curValue
   ): number {
-    return Number(accumVariable) + Number(curValue);
-  },
-  0);
+      return Number(accumVariable) + Number(curValue);
+    },
+    0);
 
   const hoursValue: any = Object.values(hours).reduce(function (
     accumVariable,
     curValue
   ) {
-    return Number(accumVariable) + Number(curValue);
-  },
-  0);
+      return Number(accumVariable) + Number(curValue);
+    },
+    0);
   if (hoursValue === 0 || resultsValue === 0) {
     document.getElementById("GPA")?.classList.add("animate-wiggle");
     sleep(500).then(() => {
@@ -201,10 +211,10 @@ function Home() {
         <div className="flex flex-col justify-content items-center w-full">
           <div
             className={
-              GPA !== 0 && CGPA === 0 && !clicked
-                ? "z-10 absolute w-screen h-screen bg-black bg-opacity-75"
-                : "hidden"
-            }
+            GPA !== 0 && CGPA === 0 && !clicked
+              ? "z-10 absolute w-screen h-screen bg-black bg-opacity-75"
+              : "hidden"
+          }
             onClick={() => {
               const GPAResultElem = document.getElementById("GPAResult");
               GPAResultElem?.classList.add("animate-zoom-out");
@@ -220,10 +230,10 @@ function Home() {
           </div>
           <div
             className={
-              CGPA !== 0 && !clicked
-                ? "z-10 absolute w-screen h-screen bg-black bg-opacity-75"
-                : "hidden"
-            }
+            CGPA !== 0 && !clicked
+              ? "z-10 absolute w-screen h-screen bg-black bg-opacity-75"
+              : "hidden"
+          }
             onClick={() => {
               const GPAResultElem = document.getElementById("CGPAResult");
               GPAResultElem?.classList.add("animate-zoom-out");
@@ -254,7 +264,7 @@ function Home() {
                   setUserGrades={setUserGrades}
                   userHours={userHours}
                   setUserHours={setUserHours}
-                />
+                  />
               ))}
               <div className="flex justify-between mx-2">
                 <button
@@ -289,19 +299,19 @@ function Home() {
                   placeholder="Old GPA"
                   className="border py-2 px-1 mb-4 mx-2 rounded"
                   id="oldGPA"
-                />
+                  />
                 <input
                   type="text"
                   placeholder="Old Hours done"
                   className="border py-2 px-1 mb-4 mx-2 rounded"
                   id="oldHours"
-                />
+                  />
                 <div className="flex justify-between mx-2">
                   <button
                     className="bg-skin-primary rounded py-2 px-4 w-full mr-2"
                     onClick={() =>
                       handleCGPA(GPA, userHours, setCGPA, setClicked)
-                    }
+                  }
                   >
                     Calculate CGPA
                   </button>
@@ -338,7 +348,7 @@ function Home() {
           </a>
         </div>
       </div>
-    </>
+      </>
   );
 }
 function handleCGPA(
